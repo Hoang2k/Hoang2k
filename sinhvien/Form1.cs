@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace sinhvien
 {
@@ -18,6 +19,7 @@ namespace sinhvien
         }
         string flag;
         DataTable dtsv;
+        int index;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -40,8 +42,9 @@ namespace sinhvien
            tb_MaSV.Text = "";
             Tb_name.Text = "";
             cb_QQuan.Text = "";
-            Cb_lop.Text = "";
-            cb_khoa.Text = "";
+            tb_diemToan.Text = "";
+            tb_diemANh.Text = "";
+            tb_diemVAn.Text = "";
 
             tb_MaSV.Focus();
         }
@@ -66,8 +69,12 @@ namespace sinhvien
             dt.Columns.Add("NgSinh");
             dt.Columns.Add("GTinh");
             dt.Columns.Add("QQuan");
-            dt.Columns.Add("lop");
-            dt.Columns.Add("khoa");
+            dt.Columns.Add("DToan");
+            dt.Columns.Add("DVan");
+            dt.Columns.Add("DAnh");
+            dt.Columns.Add("DTB");
+            dt.Columns.Add("Xetloai");
+            
             return dt;
 
         }
@@ -80,32 +87,93 @@ namespace sinhvien
 
         private void bt_sua_Click(object sender, EventArgs e)
         {
-            unlockontrol();
+           
             flag = "edit";
+
+            tb_MaSV.Text = Convert.ToString(dtsv.Rows[index][0]);
+            Tb_name.Text= Convert.ToString(dtsv.Rows[index][1]);
+            dt_NgSinh.Text= Convert.ToString(dtsv.Rows[index][2]);
+            cb_QQuan.Text= Convert.ToString(dtsv.Rows[index][3]);
+            tb_diemToan.Text= Convert.ToString(dtsv.Rows[index][4]);
+            tb_diemVAn.Text= Convert.ToString(dtsv.Rows[index][5]);
+            tb_diemANh.Text = Convert.ToString(dtsv.Rows[index][6]);
+
+            unlockontrol();
         }
 
         private void bt_luu_Click(object sender, EventArgs e)
         {
+            
             if(flag=="add")
             {
-                string gioitinh = "Nữ";
-                if(radioButton1.Checked)
+                if (Checkdata())
                 {
-                    gioitinh = "Nam";
+                    string gioitinh = "Nữ";
+                    if (radioButton1.Checked)
+                    {
+                        gioitinh = "Nam";
+                    }
+
+                    //Tính Điểm Trung Bình
+                    float diemToan = float.Parse(tb_diemToan.Text);
+                    float diemVan = float.Parse(tb_diemVAn.Text);
+                    float diemANh = float.Parse(tb_diemANh.Text);
+                    float diemtb = ((diemToan + diemANh + diemVan) / 3);
+
+
+                    //Kiểm tra 
+                    string xetloai = "";
+                    if (diemtb >= 8)
+                        xetloai = "Học Bổng";
+                    else if (diemtb <= 4)
+                        xetloai = "Cảnh Báo Học Vụ";
+                    dtsv.Rows.Add(tb_MaSV.Text, Tb_name.Text, dt_NgSinh.Value, gioitinh, cb_QQuan.Text, tb_diemToan.Text,
+                        tb_diemVAn.Text, tb_diemANh.Text, diemtb, xetloai);
+                    //đổ dữ liệu vào datatable vào datagridview
+                    dataGridViewSinhVien.DataSource = dtsv;
+                    dataGridViewSinhVien.RefreshEdit();
                 }
-                dtsv.Rows.Add(tb_MaSV.Text, Tb_name.Text, dt_NgSinh.Value, gioitinh, cb_QQuan.Text, Cb_lop.Text, cb_khoa.Text);
-                //đổ dữ liệu vào datatable vào datagridview
-                dataGridViewSinhVien.DataSource = dtsv;
-                dataGridViewSinhVien.RefreshEdit();
+            }
+            if(flag =="edit")
+            {
+                dtsv.Rows[index][0] = tb_MaSV.Text;
+                dtsv.Rows[index][1] = Tb_name.Text;
+                dtsv.Rows[index][2] = dt_NgSinh.Text;
+                dtsv.Rows[index][3] = cb_QQuan.Text;
+                dtsv.Rows[index][4] = tb_diemToan.Text;
+                dtsv.Rows[index][5] = tb_diemVAn.Text;
+                dtsv.Rows[index][6] = tb_diemANh.Text;
             }
             lockControl();
             
         }
 
         //sửa
-        private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
+        public bool Checkdata()
         {
-
+            if (string.IsNullOrWhiteSpace(tb_MaSV.Text))
+                MessageBox.Show("Vui Lòng Nhập Mã Sinh Viên", "Thông Báo");
+            if (string.IsNullOrWhiteSpace(Tb_name.Text))
+                MessageBox.Show("Vui Lòng  Nhập Tên");
+            if (string.IsNullOrWhiteSpace(cb_QQuan.Text))
+            MessageBox.Show("bạn chưa chọn quê quán", "Thông Báo");
+            if (float.Parse(tb_diemToan.Text) < 0 || float.Parse(tb_diemToan.Text) > 10)
+            {
+                MessageBox.Show("Điểm Không Hợp Lệ,mời nhập lại", "Thông Báo");
+                tb_diemToan.Focus();
+                return false;
+            }
+            return true;
+        }   
+        private void bt_xoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewSinhVien.DataSource == null)
+                MessageBox.Show("Bạn chưa có dữ liệu để xóa", "Thông Báo");
+            if (dataGridViewSinhVien.DataSource != null)
+                MessageBox.Show("Chắc Không", "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            {
+                dtsv.Rows.RemoveAt(index);
+            }
         }
     }
 }
