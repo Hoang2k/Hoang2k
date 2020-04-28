@@ -36,10 +36,17 @@
             this.tb_MaSV = new System.Windows.Forms.TextBox();
             this.Tb_name = new System.Windows.Forms.TextBox();
             this.dt_NgSinh = new System.Windows.Forms.DateTimePicker();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rd_nam = new System.Windows.Forms.RadioButton();
+            this.rd_nu = new System.Windows.Forms.RadioButton();
             this.cb_QQuan = new System.Windows.Forms.ComboBox();
             this.dataGridViewSinhVien = new System.Windows.Forms.DataGridView();
+            this.colMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_NgSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Gtinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_QQuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_lop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_khoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bt_them = new System.Windows.Forms.Button();
             this.bt_sua = new System.Windows.Forms.Button();
             this.bt_xoa = new System.Windows.Forms.Button();
@@ -49,13 +56,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.bt_nhapdiem = new System.Windows.Forms.Button();
-            this.colMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_NgSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Gtinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_QQuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_lop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_khoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cb_lop = new System.Windows.Forms.ComboBox();
             this.cb_khoa = new System.Windows.Forms.ComboBox();
             this.bt_ThongKe = new System.Windows.Forms.Button();
@@ -129,27 +129,27 @@
             this.dt_NgSinh.Size = new System.Drawing.Size(220, 22);
             this.dt_NgSinh.TabIndex = 9;
             // 
-            // radioButton1
+            // rd_nam
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(121, 150);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(58, 21);
-            this.radioButton1.TabIndex = 10;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Nam";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rd_nam.AutoSize = true;
+            this.rd_nam.Location = new System.Drawing.Point(121, 150);
+            this.rd_nam.Name = "rd_nam";
+            this.rd_nam.Size = new System.Drawing.Size(58, 21);
+            this.rd_nam.TabIndex = 10;
+            this.rd_nam.TabStop = true;
+            this.rd_nam.Text = "Nam";
+            this.rd_nam.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rd_nu
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(215, 150);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 21);
-            this.radioButton2.TabIndex = 11;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Nữ";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rd_nu.AutoSize = true;
+            this.rd_nu.Location = new System.Drawing.Point(215, 150);
+            this.rd_nu.Name = "rd_nu";
+            this.rd_nu.Size = new System.Drawing.Size(47, 21);
+            this.rd_nu.TabIndex = 11;
+            this.rd_nu.TabStop = true;
+            this.rd_nu.Text = "Nữ";
+            this.rd_nu.UseVisualStyleBackColor = true;
             // 
             // cb_QQuan
             // 
@@ -186,14 +186,64 @@
             this.dataGridViewSinhVien.TabIndex = 15;
             this.dataGridViewSinhVien.SelectionChanged += new System.EventHandler(this.dataGridViewSinhVien_SelectionChanged);
             // 
+            // colMa
+            // 
+            this.colMa.DataPropertyName = "MaSV";
+            this.colMa.HeaderText = "Mã Sv";
+            this.colMa.MinimumWidth = 6;
+            this.colMa.Name = "colMa";
+            // 
+            // colname
+            // 
+            this.colname.DataPropertyName = "Name";
+            this.colname.HeaderText = "Tên SV";
+            this.colname.MinimumWidth = 6;
+            this.colname.Name = "colname";
+            // 
+            // col_NgSinh
+            // 
+            this.col_NgSinh.DataPropertyName = "NgSinh";
+            this.col_NgSinh.HeaderText = "Ngày Sinh";
+            this.col_NgSinh.MinimumWidth = 6;
+            this.col_NgSinh.Name = "col_NgSinh";
+            // 
+            // col_Gtinh
+            // 
+            this.col_Gtinh.DataPropertyName = "GTinh";
+            this.col_Gtinh.HeaderText = "Giới Tinh";
+            this.col_Gtinh.MinimumWidth = 6;
+            this.col_Gtinh.Name = "col_Gtinh";
+            // 
+            // col_QQuan
+            // 
+            this.col_QQuan.DataPropertyName = "QQuan";
+            this.col_QQuan.HeaderText = "Quê Quán";
+            this.col_QQuan.MinimumWidth = 6;
+            this.col_QQuan.Name = "col_QQuan";
+            // 
+            // col_lop
+            // 
+            this.col_lop.DataPropertyName = "lop";
+            this.col_lop.HeaderText = "Lớp";
+            this.col_lop.MinimumWidth = 6;
+            this.col_lop.Name = "col_lop";
+            // 
+            // col_khoa
+            // 
+            this.col_khoa.DataPropertyName = "khoa";
+            this.col_khoa.HeaderText = "Khoa";
+            this.col_khoa.MinimumWidth = 6;
+            this.col_khoa.Name = "col_khoa";
+            // 
             // bt_them
             // 
+            this.bt_them.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.bt_them.Location = new System.Drawing.Point(22, 203);
             this.bt_them.Name = "bt_them";
             this.bt_them.Size = new System.Drawing.Size(75, 32);
             this.bt_them.TabIndex = 16;
             this.bt_them.Text = "Thêm";
-            this.bt_them.UseVisualStyleBackColor = true;
+            this.bt_them.UseVisualStyleBackColor = false;
             this.bt_them.Click += new System.EventHandler(this.bt_them_Click);
             // 
             // bt_sua
@@ -274,55 +324,6 @@
             this.bt_nhapdiem.UseVisualStyleBackColor = true;
             this.bt_nhapdiem.Click += new System.EventHandler(this.bt_nhapdiem_Click);
             // 
-            // colMa
-            // 
-            this.colMa.DataPropertyName = "MaSV";
-            this.colMa.HeaderText = "Mã Sv";
-            this.colMa.MinimumWidth = 6;
-            this.colMa.Name = "colMa";
-            // 
-            // colname
-            // 
-            this.colname.DataPropertyName = "Name";
-            this.colname.HeaderText = "Tên SV";
-            this.colname.MinimumWidth = 6;
-            this.colname.Name = "colname";
-            // 
-            // col_NgSinh
-            // 
-            this.col_NgSinh.DataPropertyName = "NgSinh";
-            this.col_NgSinh.HeaderText = "Ngày Sinh";
-            this.col_NgSinh.MinimumWidth = 6;
-            this.col_NgSinh.Name = "col_NgSinh";
-            // 
-            // col_Gtinh
-            // 
-            this.col_Gtinh.DataPropertyName = "GTinh";
-            this.col_Gtinh.HeaderText = "Giới Tinh";
-            this.col_Gtinh.MinimumWidth = 6;
-            this.col_Gtinh.Name = "col_Gtinh";
-            // 
-            // col_QQuan
-            // 
-            this.col_QQuan.DataPropertyName = "QQuan";
-            this.col_QQuan.HeaderText = "Quê Quán";
-            this.col_QQuan.MinimumWidth = 6;
-            this.col_QQuan.Name = "col_QQuan";
-            // 
-            // col_lop
-            // 
-            this.col_lop.DataPropertyName = "lop";
-            this.col_lop.HeaderText = "Lớp";
-            this.col_lop.MinimumWidth = 6;
-            this.col_lop.Name = "col_lop";
-            // 
-            // col_khoa
-            // 
-            this.col_khoa.DataPropertyName = "khoa";
-            this.col_khoa.HeaderText = "Khoa";
-            this.col_khoa.MinimumWidth = 6;
-            this.col_khoa.Name = "col_khoa";
-            // 
             // cb_lop
             // 
             this.cb_lop.FormattingEnabled = true;
@@ -364,6 +365,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(942, 532);
             this.Controls.Add(this.bt_ThongKe);
             this.Controls.Add(this.cb_khoa);
@@ -376,8 +378,8 @@
             this.Controls.Add(this.bt_sua);
             this.Controls.Add(this.bt_them);
             this.Controls.Add(this.cb_QQuan);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rd_nu);
+            this.Controls.Add(this.rd_nam);
             this.Controls.Add(this.dt_NgSinh);
             this.Controls.Add(this.Tb_name);
             this.Controls.Add(this.tb_MaSV);
@@ -408,8 +410,8 @@
         private System.Windows.Forms.TextBox tb_MaSV;
         private System.Windows.Forms.TextBox Tb_name;
         private System.Windows.Forms.DateTimePicker dt_NgSinh;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rd_nam;
+        private System.Windows.Forms.RadioButton rd_nu;
         private System.Windows.Forms.ComboBox cb_QQuan;
         private System.Windows.Forms.DataGridView dataGridViewSinhVien;
         private System.Windows.Forms.Button bt_them;

@@ -8,14 +8,9 @@ namespace sinhvien
 {
     class DSSinhVien
     {
-        int stt, Masv;
+        int  Masv;
         string name,lop;
         
-        public int STT
-        {
-          get { return stt; }
-            set { stt = value; }
-        }
 
         public int MaSV
         {
